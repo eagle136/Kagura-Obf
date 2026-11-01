@@ -1,0 +1,23 @@
+build/
+build_*/
+*.o
+*.a
+*.dylib
+*.so
+.cache/
+Testing/
+__pycache__/
+*.pyc
+*.pdb
+.vs/
+.DS_Store
+
+# Paper: LaTeX/PDF artifacts (not tracked)
+paper/
+
+# Prebuilt plugins published with the repository
+!release/**/*.so
+!release/**/*.dll
+!release/**/*.lib
+!release/**/*.a
+!release/**/*.dylib

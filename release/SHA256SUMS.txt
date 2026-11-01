@@ -1,0 +1,4 @@
+7efd0888ff72c2215dd57c92832d9473db8422345a3dd746d7cb38f6b6b308c0  linux-x86_64-llvm17.0.6/KaguraObfuscator.so
+8b75aa2735d8eb8ec93015752a642a4a95f0cbaf1b0d97fc2027b62e82dde021  windows-x86_64-llvm17.0.6/KaguraObfuscator.dll
+523f19a0293bdec23b6ead9f6322050de7c00e6b3e632f133bb9b7e83cacefd5  windows-x86_64-llvm19.1.7/KaguraObfuscator.dll
+90efcc17acbf6be45ed5cbf7b1b9dfe269433faac407f443fdfad39435312e00  runtime/kagura_runtime.lib
