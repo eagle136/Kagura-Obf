@@ -17,7 +17,7 @@
 
 # Kagura-Obf
 
-> **来源 / Source:** 本项目源自 [ykus4/kagura](https://github.com/ykus4/kagura)（作者 yotti，MIT License），本仓库是在其源码基础上整理的发布版本，展示名为 **Kagura-Obf**；插件文件名 `KaguraObfuscator.*` 与 `-kagura-*` 参数保持不变，以兼容上游。上游研究见 [Zenodo 10.5281/zenodo.20361447](https://doi.org/10.5281/zenodo.20361447)。
+> **来源 / Source:** 本项目源自 [ykus4/kagura](https://github.com/ykus4/kagura)（作者 yotti，MIT License），本仓库是在其源码基础上整理并修复大量空指针的修复版本，展示名为 **Kagura-Obf**；插件文件名 `KaguraObfuscator.*` 与 `-kagura-*` 参数保持不变，以兼容上游。上游研究见 [Zenodo 10.5281/zenodo.20361447](https://doi.org/10.5281/zenodo.20361447)。
 
 **English** | [简体中文](#简体中文)
 
