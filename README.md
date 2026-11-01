@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/kagura_icon.png" width="512" alt="Kagura">
+  <img src="assets/kagura_icon.png" width="512" alt="Kagura-Obf">
 </p>
 
 <p align="center">
@@ -15,11 +15,13 @@
   <img src="https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square" alt="MIT License">
 </p>
 
-# Kagura
+# Kagura-Obf
+
+> **来源 / Source:** 本项目源自 [ykus4/kagura](https://github.com/ykus4/kagura)（作者 yotti，MIT License），本仓库是在其源码基础上整理的发布版本，展示名为 **Kagura-Obf**；插件文件名 `KaguraObfuscator.*` 与 `-kagura-*` 参数保持不变，以兼容上游。上游研究见 [Zenodo 10.5281/zenodo.20361447](https://doi.org/10.5281/zenodo.20361447)。
 
 **English** | [简体中文](#简体中文)
 
-Kagura is an **OLLVM-style (Obfuscator-LLVM) code obfuscation and anti-tamper toolkit for C code**. It runs as a standard LLVM pass plugin on the New Pass Manager, so the same protection works for C (and C++) sources on Linux, Windows, macOS, Android, iOS, and WebAssembly — without forking or patching the LLVM source tree.
+Kagura-Obf is an **OLLVM-style (Obfuscator-LLVM) code obfuscation and anti-tamper toolkit for C code**. It runs as a standard LLVM pass plugin on the New Pass Manager, so the same protection works for C (and C++) sources on Linux, Windows, macOS, Android, iOS, and WebAssembly — without forking or patching the LLVM source tree.
 
 > Homepage summary (formerly `docs/index.md`): LLVM-based code obfuscation and anti-tamper toolkit for mobile, desktop, and WebAssembly targets.
 
@@ -29,7 +31,7 @@ Kagura is an **OLLVM-style (Obfuscator-LLVM) code obfuscation and anti-tamper to
 
 ### Overview
 
-Kagura operates at the LLVM IR level, before IR is lowered to machine code. Every pass is architecture-independent, and the same `clang -fpass-plugin=...` invocation protects every target supported by the underlying LLVM build.
+Kagura-Obf operates at the LLVM IR level, before IR is lowered to machine code. Every pass is architecture-independent, and the same `clang -fpass-plugin=...` invocation protects every target supported by the underlying LLVM build.
 
 - **Input:** C / C++ source, or `.bc` / `.ll` bitcode
 - **Integration:** New Pass Manager plugin (`-fpass-plugin=`), `opt --load-pass-plugin=`
@@ -324,7 +326,7 @@ MIT — see [LICENSE](LICENSE).
 
 ### 项目简介
 
-**Kagura 是一个 OLLVM（Obfuscator-LLVM）风格的 C 代码混淆与防篡改工具链。** 它以标准 LLVM Pass 插件的形式运行在 New Pass Manager 上，直接在 LLVM IR 层处理 C（以及 C++）代码，因此同一套混淆策略可以用于 Linux、Windows、macOS、Android、iOS 和 WebAssembly，**无需修改 LLVM 源码，也无需改动 C 代码的编译流程**。
+**Kagura-Obf 是一个 OLLVM（Obfuscator-LLVM）风格的 C 代码混淆与防篡改工具链。** 它以标准 LLVM Pass 插件的形式运行在 New Pass Manager 上，直接在 LLVM IR 层处理 C（以及 C++）代码，因此同一套混淆策略可以用于 Linux、Windows、macOS、Android、iOS 和 WebAssembly，**无需修改 LLVM 源码，也无需改动 C 代码的编译流程**。
 
 > 主页简介（原 `docs/index.md`）：面向移动端、桌面端和 WebAssembly 的 LLVM 代码混淆与防篡改工具链。
 
