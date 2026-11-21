@@ -19,6 +19,7 @@
 #include "llvm/IR/IRBuilder.h"
 #include "llvm/IR/Instructions.h"
 #include "llvm/ADT/SmallVector.h"
+#include "llvm/ADT/SmallPtrSet.h"
 #include "llvm/IR/PatternMatch.h"
 
 #include <functional>
@@ -317,16 +318,36 @@ static bool substituteFunction(Function &F, uint32_t Iterations, PRNG &RNG) {
       Value *Replacement = (*Substs)[Idx](BO, B, RNG);
       // Safety check: if Replacement transitively references BO, skip to avoid
       // infinite loop in LLVM's RAUW or use-after-free.
+      //
+      // 2026-11-05 FIX (was an unbounded walk):
+      //   The traversal below follows the *operand* graph, and SSA operand
+      //   graphs contain cycles: a PHI in a loop takes its own back-edge
+      //   value as an incoming operand, e.g.
+      //       %p = phi i32 [ %inc, %loop ]
+      //       %inc = add i32 %p, 3
+      //   The old code had NO visited-set, so it re-expanded the same PHI on
+      //   every visit and never terminated whenever BO was not itself part of
+      //   that cycle (BO sitting *outside* the loop but consuming %p is the
+      //   common case).  WorklistCheck grew without bound -> opt consumed
+      //   ~30 GB and the build was killed by the 60 s timeout, silently
+      //   dropping the whole kagura-sub pass from the output.
+      //   A visited-set makes the walk linear in reachable instructions and
+      //   terminates on cycles.  The self-reference verdict is unchanged:
+      //   BO can only be reached through the PHI back-edge, which the
+      //   visited-set still discovers on the first visit.
       bool HasSelfRef = false;
+      SmallPtrSet<Value *, 32> Visited;
       SmallVector<Value *, 8> WorklistCheck;
       WorklistCheck.push_back(Replacement);
+      Visited.insert(Replacement);
       while (!WorklistCheck.empty()) {
         Value *V = WorklistCheck.pop_back_val();
         if (V == BO) { HasSelfRef = true; break; }
         if (auto *I = dyn_cast<Instruction>(V))
           for (Value *Op : I->operands())
             if (isa<Instruction>(Op) || isa<Argument>(Op))
-              WorklistCheck.push_back(Op);
+              if (Visited.insert(Op).second)
+                WorklistCheck.push_back(Op);
       }
       if (HasSelfRef)
         continue;

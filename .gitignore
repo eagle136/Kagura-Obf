@@ -1,6 +1,9 @@
 build/
 build_*/
+build17win/
 *.o
+*.bak
+*.bak_*
 *.a
 *.dylib
 *.so
